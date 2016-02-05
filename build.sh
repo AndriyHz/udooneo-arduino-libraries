@@ -32,12 +32,10 @@ fi
 
 # get package script directory
 REPO_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-
-#PACKAGE_VERSION=`git describe`
-PACKAGE_VERSION=1.5.6
-
-BOARD_DOWNLOAD_URL="https://udooboard.github.io/arduino-board-package"
 BUILD=build
+
+PACKAGE_VERSION=`git describe --tags`
+BOARD_DOWNLOAD_URL="https://udooboard.github.io/udooneo-arduino-libraries"
 
 GREEN="\e[32m"
 RED="\e[31m"
