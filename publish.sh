@@ -38,7 +38,7 @@ git archive --format zip -o "$PKG_OUTPUT" "$BRANCH"
 cat << LOL > index.html
 <html>
 <head>
-<meta http-equiv="Refresh" content="0; url="$LATEST" />
+<meta http-equiv="Refresh" content="0; url=$LATEST" />
 </head>
 <body>
 </body>
