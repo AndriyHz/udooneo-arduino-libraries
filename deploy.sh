@@ -24,14 +24,14 @@ git commit -m "Deploy to Arduino branch"
 git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:arduino > /dev/null 2>&1
 
 cd ..
-# go to the out directory and create a *new* Git repo
-mkdir deploy
-cd deploy
+
 git pull
+mkdir deploy
 
 DOWNLOAD_URL="https://udooboard.github.io/udooneo-arduino-libraries"
-../publish.sh arduino "$DOWNLOAD_URL"
+./publish.sh origin/arduino "$DOWNLOAD_URL" deploy
 
+cd deploy
 git init
 
 # inside this git repo we'll pretend to be a new user

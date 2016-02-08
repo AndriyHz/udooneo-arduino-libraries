@@ -20,19 +20,21 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
+set -e
 
 # set variables
 BRANCH="${1:-master}"
 URL="$2"
+DIR="${3:-deploy}"
 [ -z $1 ] && exit 99
 
 PKG_VER=`git describe --tags`
-PKG_ORIG=`basename $(git remote show -n origin | grep Fetch | cut -d: -f2-)`
+PKG_ORIG=`basename $(git remote show -n origin | grep Fetch | cut -d: -f2-) .git`
 PKG_OUTPUT="$PKG_ORIG-$PKG_VER.zip"
 LATEST="$URL/$PKG_OUTPUT"
 
 # create lib archive
-git archive --format zip -o "$PKG_OUTPUT" "$BRANCH"
+git archive --format zip -o "$DIR/$PKG_OUTPUT" "$BRANCH"
 
 # create redirect
 cat << LOL > index.html
