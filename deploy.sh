@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e # exit with nonzero exit code if anything fails
 TAG=`git describe --tags`
-GH_REPO=`basename ${GH_REF}`
+GH_REPO=`basename ${GH_REL%%.git}`
 
 # Compile 
 ./build.sh
@@ -27,9 +27,10 @@ git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:arduino > /dev/n
 
 cd ..
 
+
 #cloning release repo
-git clone "https://${GH_REF}-release" 
-cd ${GH_REPO}-release
+git clone "https://${GH_REL}" 
+cd ${GH_REPO}
 
 #get the tags
 git pull --tags
@@ -58,7 +59,7 @@ else
   git tag -a $TAG -m "Releasing $TAG" 
 
   echo "Pushing..."
-  git push --tags -fq "https://${GH_TOKEN}@${GH_REF}-release" master > /dev/null 2>&1
+  git push --tags -fq "https://${GH_TOKEN}@${GH_REL}" master > /dev/null 2>&1
 
 fi
 

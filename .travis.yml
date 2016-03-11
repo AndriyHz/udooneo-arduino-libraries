@@ -2,6 +2,7 @@ script: bash ./deploy.sh
 env:
   global:
   - GH_REF: github.com/udooboard/udooneo-arduino-libraries.git
+  - GH_REL: github.com/udooboard/udooneo-arduino-libraries-release.git
   - secure: "mkCG2hEORvuz7WJ0oyd+rXwVXmUXLepKEilfnjVXGgMXuf/JtzkT3qDdsFQ/cHvyVW1xW/6VFhnf0hmP0tc/JDWuyeMCCzEmwTy4iDxYhSKiWQjnmGvScuApEW9cAhbw6L3j731FUyZAPU0iNLJsJWxYYwF0LzW/KPPAv2ygUm1nCoFPenMRBHGCy1oLwY1Gcu02g2VvkI1zDUxuZo4hGSoy2z71nkEZaOpjF97xumn6T4lZNIOYCB2gDwt3vvTPRpZaBl+CMf+DQ9pVlA1Zx5MqIqhIeiAXL+bVwerAvdJ1+wuKYDD7iYgEvUWxAwGXJuDqxVOLCDvbx8v33JMnoY++q6G42WkJ475n0ApAJxLx4ytkxpR8eGaRZbvoihHYfBlF/5dsT8zZmba63HkMVZaKwU5KDYMb3UhyfXCgOvyU7jjcednDalPU7F62jlHUnp6uwUXdA+25c4YJxjMzfLK69jIOkn6UhlNHMWTOKAHg63WU4gPmI2/cACwYmpvp0DFzJSq4bDC9box6nBLx8TduyLe9apw4ZwsO0IXRWpXFlzGGwTeL2o8lYAjQq1/z4+9Zr0/HKEhHtXPvcmEwjSJD4L3HYduzd8BC2C21+70a8JBVK6xIvQZAQVKiEH0iVwjSH8KbP16z0lDfrVSkiXBQFib3fLNlRod1PESs5+s="
 language: python
 python:
