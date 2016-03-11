@@ -1,5 +1,7 @@
 #!/bin/bash
 set -e # exit with nonzero exit code if anything fails
+TAG=`git describe --tags`
+GH_REPO=`basename ${GH_REF}`
 
 # Compile 
 ./build.sh
@@ -23,11 +25,43 @@ git commit -m "Deploy to Arduino branch"
 # /dev/null to hide any sensitive credential data that might otherwise be exposed.
 git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:arduino > /dev/null 2>&1
 
-#cd ..
-#
-#git pull
-#mkdir deploy
-#
+cd ..
+
+#cloning release repo
+git clone "https://${GH_REF}-release" 
+cd ${GH_REPO}-release
+
+#get the tags
+git pull --tags
+
+if
+  # check if is a semver compliant tag 
+  ! [[ $( sed -ne '/^[0-9]*\.[0-9]*\.[0-9]*$/p' <<< $TAG ) ]]
+then
+  echo "Not a release tag, not deploying to arduino repo"
+
+elif 
+  # check if actual version is present
+  git tag | egrep -q "^${TAG}$"
+then 
+  echo "Already pushed this revision! Exit ;)"
+
+else
+
+  echo "Copying new revision..."
+  rm -rf *
+  cp -r ../build/* .
+
+  echo "Adding..."
+  git add .
+  git commit -m "Deploy to Arduino branch"
+  git tag -a $TAG -m "Releasing $TAG" 
+
+  echo "Pushing..."
+  git push --tags -fq "https://${GH_TOKEN}@${GH_REF}-release" master > /dev/null 2>&1
+
+fi
+
 #DOWNLOAD_URL="https://udooboard.github.io/udooneo-arduino-libraries"
 #./publish.sh origin/arduino "$DOWNLOAD_URL" deploy
 #
