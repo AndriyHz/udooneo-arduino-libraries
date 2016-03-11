@@ -33,7 +33,7 @@ git clone "https://${GH_REL}"
 cd ${GH_REPO}
 
 #get the tags
-git pull --tags
+git fetch --tags
 
 if
   # check if is a semver compliant tag 
