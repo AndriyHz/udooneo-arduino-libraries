@@ -77,11 +77,16 @@ sed -e "s/VERSION/$PACKAGE_VERSION/" \
     < library.properties > $BUILD/library.properties
 
 #sync all libraries
+git submodule init
 git submodule sync
+git submodule update
 
 #copy all the examples
 mkdir $D $BUILD/examples
 find -type d -path '*/examples/*' -exec cp -r $D {} $BUILD/examples \;
+
+#concatenate all the keywords
+cat */keywords.txt > $BUILD/keywords.txt
 
 #copy all the sources in the same dir
 for i in `find -type f \( -name '*.c' -o -name '*.cpp' \)`
