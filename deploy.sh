@@ -54,11 +54,13 @@ else
   cp -r ../build/* .
 
   echo "Adding..."
-  git add .
+  git add --all .
   git commit -m "Deploy to Arduino branch"
   git tag -a $TAG -m "Releasing $TAG" 
 
   echo "Pushing..."
+  git config user.name "Travis CI"
+  git config user.email "social@udoo.org"
   git push --tags -fq "https://${GH_TOKEN}@${GH_REL}" master > /dev/null 2>&1
 
 fi
