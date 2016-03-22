@@ -10,3 +10,6 @@
 [submodule "LiquidCrystal"]
 	path = LiquidCrystal
 	url = https://github.com/UDOOboard/LiquidCrystal
+[submodule "TSL2561-Arduino-Library"]
+	path = TSL2561-Arduino-Library
+	url = https://github.com/UDOOboard/TSL2561-Arduino-Library
