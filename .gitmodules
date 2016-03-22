@@ -7,3 +7,6 @@
 [submodule "LM75"]
 	path = LM75
 	url = https://github.com/thefekete/LM75
+[submodule "LiquidCrystal"]
+	path = LiquidCrystal
+	url = https://github.com/UDOOboard/LiquidCrystal
