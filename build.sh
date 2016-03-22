@@ -34,7 +34,7 @@ fi
 REPO_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 BUILD=build
 
-PACKAGE_VERSION=`git describe --tags`
+PACKAGE_VERSION=$(awk -F- '{printf("%s-%04d-%s", $(NF-2), $(NF-1),$(NF))}' <<< `git describe --tags`)
 BOARD_DOWNLOAD_URL="https://udooboard.github.io/udooneo-arduino-libraries"
 
 GREEN="\e[32m"
