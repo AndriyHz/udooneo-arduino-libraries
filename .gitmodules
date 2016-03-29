@@ -16,3 +16,6 @@
 [submodule "SI7021"]
 	path = SI7021
 	url = https://github.com/UDOOboard/SI7021
+[submodule "Adafruit_MPL3115A2_Library"]
+	path = Adafruit_MPL3115A2_Library
+	url = https://github.com/UDOOboard/Adafruit_MPL3115A2_Library
