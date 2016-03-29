@@ -51,7 +51,7 @@ scm_ver()
 			if atag="`git describe 2>/dev/null`"; then
         
         #edited by ek5 -> 1.6.6-00001-g0bc4b15% (need plus)
-        awk -F- '{printf("%s-%05d-%s", $(NF-2), $(NF-1), $(NF))}' <<< "$atag"
+        awk -F- '{printf("%s-%04d-%s", $(NF-2), $(NF-1), $(NF))}' <<< "$atag"
 
 			# If we don't have a tag at all we print -g{commitish}.
 			else
