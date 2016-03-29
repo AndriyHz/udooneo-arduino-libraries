@@ -34,7 +34,46 @@ fi
 REPO_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 BUILD=build
 
-PACKAGE_VERSION=$(awk -F- '{printf("%s-%04d-%s", $(NF-2), $(NF-1),$(NF))}' <<< `git describe --tags`)
+scm_ver()
+{
+  ## from kernel sources
+
+	# Check for git and a git repo.
+	if test -z "$(git rev-parse --show-cdup 2>/dev/null)" &&
+	   head=`git rev-parse --verify --short HEAD 2>/dev/null`; then
+
+		# If we are at a tagged commit (like "v2.6.30-rc6"), we ignore
+		# it, because this version is defined in the top level Makefile.
+		if [ -z "`git describe --exact-match 2>/dev/null`" ]; then
+
+			# If we are past a tagged commit (like
+			# "v2.6.30-rc5-302-g72357d5"), we pretty print it.
+			if atag="`git describe 2>/dev/null`"; then
+        
+        #edited by ek5 -> 1.6.6-00001-g0bc4b15% (need plus)
+        awk -F- '{printf("%s-%05d-%s", $(NF-2), $(NF-1), $(NF))}' <<< "$atag"
+
+			# If we don't have a tag at all we print -g{commitish}.
+			else
+				printf '%s%s' -g $head
+			fi
+
+    else
+      #we do not have Makefiles lol
+      printf '%s' "`git describe 2>/dev/null`" 
+		fi
+
+		# Check for uncommitted changes
+		if git diff-index --name-only HEAD | grep -qv "^debian/"; then
+			printf '%s' -dirty
+		fi
+
+		# All done with git
+		return
+	fi
+}
+
+PACKAGE_VERSION=$( scm_ver ) 
 BOARD_DOWNLOAD_URL="https://udooboard.github.io/udooneo-arduino-libraries"
 
 GREEN="\e[32m"
