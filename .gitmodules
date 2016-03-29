@@ -6,7 +6,7 @@
 	url = https://github.com/UDOOboard/fxos8700cq-arduino
 [submodule "LM75"]
 	path = LM75
-	url = https://github.com/thefekete/LM75
+	url = https://github.com/UDOOboard/LM75
 [submodule "LiquidCrystal"]
 	path = LiquidCrystal
 	url = https://github.com/UDOOboard/LiquidCrystal
